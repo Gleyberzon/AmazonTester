@@ -55,7 +55,6 @@ namespace AmazonTester
                 }
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             }
-
         }
 
         public void LoadApplication(IWebDriver driver, string url)
