@@ -28,27 +28,27 @@ namespace AmazonTester
                 switch (key) {
                     case "Price_Lower_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and translate(text(),'$,','')<" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')<" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
                             break;
                         }
                     case "Price_Lower_Or_Equal_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and translate(text(),'$,','')<=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')<=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
                             break;
                         }
                     case "Price_Higher_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and translate(text(),'$,','')>" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')>" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
                             break;
                         }
                     case "Price_Higher_Or_Equal_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and translate(text(),'$,','')>=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')>=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
                             break;
                         }
-                    case "Equal_To":
+                    case "Price_Equal_To":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and translate(text(),'$,','')=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
                             break;
                         }
                     case "Free_Shipping":

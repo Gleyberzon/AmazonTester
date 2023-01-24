@@ -31,9 +31,12 @@ namespace AmazonTester
             Amazon.Pages.Home.SearchBar.Text = "PC";
             Amazon.Pages.Home.SearchBar.Click();
             List<Item> items = Amazon.Pages.Search.Results.GetResultsBy(new Dictionary<string, string>() {
-                {"Price_Lower_Then","400"},
-                {"Price_Higher_Then","200"},
-                {"Free_Shipping","False"}
+                //{"Price_Lower_Then","400"},
+                {"Price_Lower_Or_Equal_Then","1000"},
+                //{"Price_Higher_Then","200"},
+                {"Price_Higher_Or_Equal_Then","34"}
+                //{"Price_Equal_To","349"},
+                //{"Free_Shipping","False"}
             });
             Console.WriteLine("Results: \n");
             foreach (Item item in items)
