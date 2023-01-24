@@ -51,6 +51,18 @@ namespace AmazonTester
                             xpath += "/./*//span[@class='a-offscreen' and translate(text(),'$,','')=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
                             break;
                         }
+                    case "Free_Shipping":
+                        {
+                            if (dict[key].Equals("True"))
+                            {
+                                xpath += "/./*//*[contains(text(),'FREE Shipping')]/ancestor::div[@data-component-type='s-search-result']";
+                            }
+                            if (dict[key].Equals("False"))
+                            {
+                                xpath += "/./*//*[not(contains(text(),'FREE Shipping'))]/ancestor::div[@data-component-type='s-search-result']";
+                            }
+                            break;
+                        }
 
 
                 }
@@ -60,7 +72,7 @@ namespace AmazonTester
             foreach (IWebElement el in list)
             {
                 string title = el.FindElement(By.CssSelector(".a-size-medium.a-color-base.a-text-normal")).Text;
-                string price = el.FindElement(By.CssSelector(".a-offscreen")).Text;
+                string price = el.FindElement(By.CssSelector(".a-price-whole")).Text +'.'+ el.FindElement(By.CssSelector(".a-price-fraction")).Text+'$';
                 items.Add(new Item(title, price));
             }
             return items;
