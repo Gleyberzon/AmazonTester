@@ -10,10 +10,12 @@ namespace AmazonTester
     {
         private string title;
         private string price;
-        public Item(string title, string price)
+        private string link;
+        public Item(string title, string price, string link)
         {
             this.title = title;
             this.price = price;
+            this.link = link;
         }
         public string Title { 
             get{
@@ -23,6 +25,14 @@ namespace AmazonTester
         public string Price { 
             get {
                 return this.price;
+            }
+        }
+
+        public string Link
+        {
+            get
+            {
+                return this.link;
             }
         }
     }

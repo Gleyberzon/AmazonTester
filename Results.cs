@@ -63,17 +63,17 @@ namespace AmazonTester
                             }
                             break;
                         }
-
-
                 }
             }
+
             List<IWebElement> list = this.items.FindElements(By.XPath(xpath)).ToList<IWebElement>();
             List<Item> items = new List<Item>();
             foreach (IWebElement el in list)
             {
                 string title = el.FindElement(By.CssSelector(".a-size-medium.a-color-base.a-text-normal")).Text;
                 string price = el.FindElement(By.CssSelector(".a-price-whole")).Text +'.'+ el.FindElement(By.CssSelector(".a-price-fraction")).Text+'$';
-                items.Add(new Item(title, price));
+                string link = el.FindElement(By.XPath(".//a[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']")).GetAttribute("href");
+                items.Add(new Item(title, price, link));
             }
             return items;
         }
