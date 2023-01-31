@@ -22,51 +22,53 @@ namespace AmazonTester
         {
             if (dict == null || dict.Count == 0)
                 return null;
-            string xpath = "/";
+            string xpath = "//span[@class='a-offscreen' and parent::span[not(@data-a-strike)] ";
             foreach (string key in dict.Keys)
             {
                 switch (key) {
                     case "Price_Lower_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')<" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += " and translate(text(),'$,','')<" + Int32.Parse(dict[key]);
                             break;
                         }
                     case "Price_Lower_Or_Equal_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')<=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += " and translate(text(),'$,','')<=" + Int32.Parse(dict[key]);
                             break;
                         }
                     case "Price_Higher_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')>" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += " and translate(text(),'$,','')>" + Int32.Parse(dict[key]);
                             break;
                         }
                     case "Price_Higher_Or_Equal_Then":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')>=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += " and translate(text(),'$,','')>=" + Int32.Parse(dict[key]);
                             break;
                         }
                     case "Price_Equal_To":
                         {
-                            xpath += "/./*//span[@class='a-offscreen' and parent::*[not(@data-a-strike='True')] and translate(text(),'$,','')=" + Int32.Parse(dict[key]) + "]/ancestor::div[@data-component-type='s-search-result']";
+                            xpath += " and translate(text(),'$,','')=" + Int32.Parse(dict[key]);
                             break;
                         }
                     case "Free_Shipping":
                         {
                             if (dict[key].Equals("True"))
                             {
-                                xpath += "/./*//*[contains(text(),'FREE Shipping')]/ancestor::div[@data-component-type='s-search-result']";
+                                xpath += " and ancestor::div[@data-component-type='s-search-result' and contains(.,'FREE Shipping')]";
                             }
                             if (dict[key].Equals("False"))
                             {
-                                xpath += "/./*//*[not(contains(text(),'FREE Shipping'))]/ancestor::div[@data-component-type='s-search-result']";
+                                xpath += " and ancestor::div[@data-component-type='s-search-result' and not(contains(.,'FREE Shipping'))]";
                             }
                             break;
                         }
                 }
             }
+            xpath += "]/ancestor::div[@data-component-type='s-search-result']";
 
-            List<IWebElement> list = this.items.FindElements(By.XPath(xpath)).ToList<IWebElement>();
+
+            List<IWebElement> list = this.driver.FindElements(By.XPath(xpath)).ToList<IWebElement>();
             List<Item> items = new List<Item>();
             foreach (IWebElement el in list)
             {

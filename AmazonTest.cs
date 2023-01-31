@@ -29,15 +29,15 @@ namespace AmazonTester
         [Test]
         public void Test1()
         {
-            Amazon.Pages.Home.SearchBar.Text = "Computer monitor";
+            Amazon.Pages.Home.SearchBar.Text = "PC";
             Amazon.Pages.Home.SearchBar.Click();
             List<Item> items = Amazon.Pages.Search.Results.GetResultsBy(new Dictionary<string, string>() {
                 {"Price_Lower_Then","1000"},
-                //{"Price_Lower_Or_Equal_Then","1000"},
-                //{"Price_Higher_Then","200"},
-                {"Price_Higher_Or_Equal_Then","0"}
+                //{"Price_Lower_Or_Equal_Then","1000"}
+                {"Price_Higher_Then","200"},
+                //{"Price_Higher_Or_Equal_Then","300"},
                 //{"Price_Equal_To","349"},
-                //{"Free_Shipping","True"},
+                //{"Free_Shipping","True"}
                 //{"Free_Shipping","False"}
             });
             Console.WriteLine("Results: \n");
@@ -52,7 +52,7 @@ namespace AmazonTester
 
         [TearDown] public void TearDown()
         {
-            browserFactory.CloseAllDrivers();
+            //browserFactory.CloseAllDrivers();
         }
     }
 }
